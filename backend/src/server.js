@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import statsRoutes from "./routes/statsRoutes.js";
 import packageRoutes from "./routes/packageRoutes.js";
+import clientRoutes from "./routes/clientRoutes.js";
 
 dotenv.config();
 
@@ -23,7 +24,8 @@ app.use(
 // Routes
 app.use("/auth", authRoutes);
 app.use("/stats", statsRoutes);
-app.use("/pack", packageRoutes);
+app.use("/api", packageRoutes);
+app.use("/api", clientRoutes);
 
 // Root Endpoint
 app.get("/", (req, res) => {
