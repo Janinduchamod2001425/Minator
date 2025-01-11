@@ -11,7 +11,7 @@ import {
 import { db } from "../config/firebase.js";
 
 // Add new client
-export const AddClient = async (req, res) => {
+export const addClient = async (req, res) => {
   try {
     const { name, membershipType, status, joinDate } = req.body;
 
@@ -36,7 +36,7 @@ export const AddClient = async (req, res) => {
 };
 
 // Get all clients
-export const GetAllClients = async (req, res) => {
+export const getAllClients = async (req, res) => {
   try {
     const clientSnaphot = await getDocs(collection(db, "clients"));
     const clients = clientSnaphot.docs.map((doc) => ({
@@ -51,7 +51,7 @@ export const GetAllClients = async (req, res) => {
 };
 
 // Update client
-export const UpdateClient = async (req, res) => {
+export const updateClient = async (req, res) => {
   try {
     const { id } = req.params;
     const updatedClient = req.body;
@@ -67,7 +67,7 @@ export const UpdateClient = async (req, res) => {
 };
 
 // Delete Client
-export const DeleteClient = async (req, res) => {
+export const deleteClient = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -82,7 +82,7 @@ export const DeleteClient = async (req, res) => {
 };
 
 // Search Client
-export const SearchClient = async (req, res) => {
+export const searchClient = async (req, res) => {
   try {
     const { name, membershipType, status } = req.query;
 

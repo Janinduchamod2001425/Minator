@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoutes.js";
 import statsRoutes from "./routes/statsRoutes.js";
 import packageRoutes from "./routes/packageRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
+import trainerRoutes from "./routes/trainerRoutes.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/auth", authRoutes);
 app.use("/stats", statsRoutes);
 app.use("/api", packageRoutes);
 app.use("/api", clientRoutes);
+app.use("/api", trainerRoutes);
 
 // Root Endpoint
 app.get("/", (req, res) => {

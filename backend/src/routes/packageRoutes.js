@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  CreatePackage,
+  createPackage,
   deletePackage,
   getAllPackages,
   updatePackage,
@@ -8,7 +8,7 @@ import {
 
 const router = express.Router();
 
-router.post("/packages", CreatePackage);
+router.post("/packages", createPackage);
 router.get("/packages", getAllPackages);
 router.put("/packages/:id", updatePackage);
 router.delete("/packages/:id", deletePackage);

@@ -6,7 +6,7 @@ import { auth, db } from "../config/firebase.js";
 import { collection, addDoc } from "firebase/firestore";
 import { generateToken } from "../utils/utils.js";
 
-export const SignUpUser = async (req, res) => {
+export const signUpUser = async (req, res) => {
   const { email, password, confirmPassword, name } = req.body;
 
   if (!email || !password || !confirmPassword || !name) {
@@ -43,7 +43,7 @@ export const SignUpUser = async (req, res) => {
   }
 };
 
-export const LoginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {

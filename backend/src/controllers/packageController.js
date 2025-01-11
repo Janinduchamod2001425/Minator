@@ -9,7 +9,7 @@ import {
 import { db } from "../config/firebase.js";
 
 // Create new package
-export const CreatePackage = async (req, res) => {
+export const createPackage = async (req, res) => {
   const { name, price, duration, description } = req.body;
 
   // Validate fields
