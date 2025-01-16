@@ -5,7 +5,6 @@ import {
   getActiveClasses,
   getMonthlyRevenue,
 } from "../controllers/statsController.js";
-import { protectRoute } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 

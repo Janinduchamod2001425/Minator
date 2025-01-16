@@ -1,6 +1,6 @@
 import express from "express";
 
-import { signUpUser, loginUser } from "../controllers/authController.js";
+import { signUpUser, loginUser, logoutUser, getProfile } from "../controllers/authController.js";
 
 const router = express.Router();
 
@@ -9,5 +9,11 @@ router.post("/signup", signUpUser);
 
 // login route
 router.post("/login", loginUser);
+
+// logout route
+router.post("/logout", logoutUser);
+
+// Profile route
+router.get("/profile/:uid", getProfile);
 
 export default router;

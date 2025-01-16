@@ -15,12 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "http://localhost:5000",
-    credentials: true, // allow cookies to be sent back and forth between client and server
-  })
-);
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 // Routes
 app.use("/auth", authRoutes);

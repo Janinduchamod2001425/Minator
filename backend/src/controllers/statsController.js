@@ -4,7 +4,7 @@ import { db } from "../config/firebase.js";
 // Get Total Members Count
 export const getTotalMembers = async (req, res) => {
   try {
-    const usersSnapshot = await getDocs(collection(db, "users"));
+    const usersSnapshot = await getDocs(collection(db, "clients"));
     const membersCount = usersSnapshot.size; // size of the snapshot gives the user count
     res.status(200).json({ membersCount });
   } catch (error) {
@@ -33,7 +33,7 @@ export const getActiveClasses = async (req, res) => {
       (doc) => doc.data().status === "active"
     );
     res.status(200).json({ activeClassesCount: activeClassesCount.length });
-  } catch (error) {}
+  } catch (error) { }
 };
 
 // Get Monthly Revenue Details
@@ -44,7 +44,7 @@ export const getMonthlyRevenue = async (req, res) => {
     const payments = paymentsSnapshot.docs.map((doc) => doc.data());
     const currentMonth = new Date().getMonth();
     const monthlyRevenue = payments.filter((payment) => {
-      const paymentDate = payment.timestamp.toDate(); // Convert timestamp to date
+      const paymentDate = payment.timestamp.toDate();
       return paymentDate.getMonth() === currentMonth;
     });
 
