@@ -41,7 +41,12 @@ const Sidebar = () => {
       {/* Logo */}
       <div className="mb-20 hidden md:block">
         <div className="h-10 w-8 mx-auto">
-          <img src={Logo} alt="Logo" className="mt-3" />
+          <img
+            src={Logo}
+            alt="Logo"
+            className="mt-3"
+            onClick={() => navigate("/dashboard")}
+          />
         </div>
       </div>
       {/* Navigation Icons */}

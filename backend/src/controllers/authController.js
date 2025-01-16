@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  getAuth,
   signInWithEmailAndPassword,
   signOut
 } from "firebase/auth";
@@ -126,3 +127,4 @@ export const getProfile = async (req, res) => {
     res.status(500).json({ message: "Error fetching user profile" });
   }
 };
+
