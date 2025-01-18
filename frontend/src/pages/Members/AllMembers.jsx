@@ -17,6 +17,8 @@ const formatDate = () => {
 const AllMembers = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredMembers, setFilteredMembers] = useState([]);
   const navigate = useNavigate();
 
   // Fetch plans from the API
@@ -24,6 +26,7 @@ const AllMembers = () => {
     try {
       const response = await axiosInstance.get("/api/clients");
       setMembers(response.data); // Assuming the API response returns an array of plans
+      setFilteredMembers(response.data); // Filtered members initially set to all members
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to fetch members");
     } finally {
@@ -59,6 +62,37 @@ const AllMembers = () => {
     });
   };
 
+  // Search member based on query
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    try {
+      if (!query) {
+        setFilteredMembers(members); // Reset all members if query is empty
+      } else {
+        const lowerCaseQuery = query.toLowerCase();
+        const filtered = members.filter((member) => {
+          const isNameMatch = member.name
+            .toLowerCase()
+            .includes(lowerCaseQuery);
+          const isMembershipTypeMatch = member.membershipType
+            .toLowerCase()
+            .includes(lowerCaseQuery);
+          const isStatusMatch = member.status.toLowerCase() === lowerCaseQuery; // Exact match for status
+          return isNameMatch || isMembershipTypeMatch || isStatusMatch;
+        });
+        setFilteredMembers(filtered);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to search members");
+    }
+  };
+
+  // Clear search query and reset table
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setFilteredMembers(members); // Reset filtered members to all members
+  };
+
   useEffect(() => {
     fetchMembers();
   }, []);
@@ -80,6 +114,28 @@ const AllMembers = () => {
               {formatDate()}
             </p>
           </div>
+
+          {/* Search Bar */}
+          <div className="sm:space-x-4 sm:space-y-5 sm:ml-56 space-x-1">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              placeholder="Search by name, membership type, or status"
+              className="flex-1 sm:px-4 sm:py-1 sm:w-[500px] w-[200px] px-2 sm:text-[13px] font-poppins border rounded-lg bg-blue-50 font-medium text-gray-700 focus:outline-none focus:ring-purple-300"
+            />
+
+            {/* Clear Button */}
+            {searchQuery && (
+              <button
+                onClick={handleClearSearch}
+                className="sm:px-4 sm:py-1 sm:text-sm font-poppins font-bold text-xs px-3 py-0.5 bg-purple-950 text-white rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+
           <div className="py-4 sm:py-0 sm:mr-4">
             <p className="text-xs font-bold text-gray-500 sm:text-right text-center mr-1">
               Click here to add
@@ -97,12 +153,12 @@ const AllMembers = () => {
         </header>
 
         {/* Main Panel */}
-        <div className="sm:h-[520px] overflow-y-auto mb-10 sm:mb-0">
+        <div className="sm:h-[520px] overflow-y-scroll mb-10 sm:mb-0">
           {loading ? (
             <p className="font-bold">💪 Loading Members...</p>
-          ) : members.length > 0 ? (
-            <table className="table-auto w-full bg-white shadow-md rounded-md overflow-hidden">
-              <thead className="bg-gray-200">
+          ) : filteredMembers.length > 0 ? (
+            <table className="table-auto w-full bg-white shadow-md rounded-md">
+              <thead className="bg-gray-200 sticky top-0 z-10">
                 <tr className="text-indigo-900 text-left">
                   <th className="py-3 px-4 font-bold">Member Name</th>
                   <th className="py-3 px-4 font-bold">Membership Type</th>
@@ -112,7 +168,7 @@ const AllMembers = () => {
                 </tr>
               </thead>
               <tbody className="font-medium">
-                {members.map((member, index) => (
+                {filteredMembers.map((member, index) => (
                   <tr
                     key={member.id}
                     className={`${
@@ -176,7 +232,6 @@ const AllMembers = () => {
                         )}
                       </span>
                     </td>
-
                     <td className="py-3 px-4">{member.joinDate}</td>
                     <td className="py-3 px-4 flex gap-4 flex-row justify-center">
                       {/* Edit Icon */}
@@ -230,9 +285,10 @@ const AllMembers = () => {
           ) : (
             <div className="flex justify-center items-center w-full h-68 sm:h-64 sm:flex-row flex-col">
               <Lottie
+                onClick={() => navigate("/members")}
                 animationData={noDataAnimation}
                 loop={true}
-                className="w-[300px] h-[300px] sm:w-[650px] sm:h-[650px] mt-4 sm:mt-32"
+                className="w-[300px] h-[300px] sm:w-[620px] sm:h-[620px] mt-4 sm:mt-32"
               />
               <p className="text-lg font-poppins font-bold text-black bg-purple-200 sm:py-2 sm:px-5 px-5 py-3 rounded-xl">
                 No Members available
