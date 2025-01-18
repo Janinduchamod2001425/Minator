@@ -12,7 +12,7 @@ const ProfilePage = () => {
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex-1 font-poppins p-6 ml-0 md:ml-5 lg:ml-35">
+      <div className="flex-1 font-poppins p-6 ml-0 mr-0 md:ml-5 md:mr-5 lg:mr-35 lg:ml-35">
         {/* Header */}
         <header className="flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:items-center mb-8 space-y-4 sm:space-y-0">
           <div>

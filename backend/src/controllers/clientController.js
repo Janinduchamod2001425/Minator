@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   query,
   updateDoc,
@@ -27,23 +28,44 @@ export const addClient = async (req, res) => {
     });
 
     res
-      .status(200)
-      .json({ message: "Client added successfully", clientId: clientRef.id });
+      .status(201)
+      .json({ message: "Client added successfully", id: clientRef.id });
   } catch (error) {
     console.error("Error adding client:", error.message);
     res.status(500).json({ message: "Internal Server error" });
   }
 };
 
+// Get client by id
+export const getClientById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const clientRef = doc(db, "clients", id);
+    const clientSnapShot = await getDoc(clientRef);
+
+    if (!clientSnapShot.exists()) {
+      return res.status(404).json({ message: "Client not found" });
+    }
+
+    res.status(200).json({ id: clientSnapShot.id, ...clientSnapShot.data() });
+
+  } catch (error) {
+    console.error("Error fetching client:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
 // Get all clients
 export const getAllClients = async (req, res) => {
   try {
     const clientSnaphot = await getDocs(collection(db, "clients"));
+
     const clients = clientSnaphot.docs.map((doc) => ({
-      id: doc.id, // Id of the client
-      ...doc.data(), // retrive the client data as objects
+      id: doc.id,
+      ...doc.data(),
     }));
-    res.status(200).json({ clients });
+    res.status(200).json(clients);
   } catch (error) {
     console.error("Error getting clients:", error.message);
     res.status(500).json({ message: "Internal Server error" });

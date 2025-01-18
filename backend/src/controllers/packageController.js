@@ -1,10 +1,11 @@
 import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  updateDoc,
-  deleteDoc,
+  collection, // collection
+  addDoc, // add a doc to the collection
+  getDocs, // get a list of documents
+  getDoc, // get only the documents by given id
+  doc, // get the document
+  updateDoc, // update a document
+  deleteDoc, // delete a document
 } from "firebase/firestore";
 import { db } from "../config/firebase.js";
 
@@ -31,9 +32,10 @@ export const createPackage = async (req, res) => {
     // Add new packages to Firestore
     const packageRef = await addDoc(collection(db, "packages"), {
       name,
-      price,
+      price: parseFloat(price),
       duration,
       description,
+      createdAt: new Date().toISOString(),
     });
 
     res
@@ -44,6 +46,25 @@ export const createPackage = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+// Get package by id
+export const getPackageById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const packageRef = doc(db, "packages", id);
+    const packageSnapShot = await getDoc(packageRef);
+
+    if (!packageSnapShot.exists()) {
+      return res.status(404).json({ message: "Package not found" });
+    }
+
+    res.status(200).json({ id: packageSnapShot.id, ...packageSnapShot.data() });
+  } catch (error) {
+    console.error("Error fetching package", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
 
 // Fetch all packages
 export const getAllPackages = async (req, res) => {
@@ -85,9 +106,10 @@ export const updatePackage = async (req, res) => {
     const packageRef = doc(db, "packages", id);
     await updateDoc(packageRef, {
       name,
-      price,
+      price: parseFloat(price),
       duration,
       description,
+      createdAt: new Date().toISOString(),
     });
 
     res.status(200).json({ message: "Package updated successfully" });

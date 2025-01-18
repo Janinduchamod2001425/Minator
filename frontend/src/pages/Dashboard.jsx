@@ -9,6 +9,7 @@ import Members from "../assets/members.png";
 
 import axiosInstance from "../utils/axiosInstance";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = () => {
   const options = { month: "short", day: "2-digit", year: "numeric" };
@@ -20,6 +21,8 @@ const Dashboard = () => {
   const [trainerCount, setTrainerCount] = useState(0);
   const [activeClassesCount, setActiveClassesCount] = useState(0);
   const [monthlyRevenue, setMonthlyRevenue] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch total members
@@ -67,12 +70,12 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+    <div className="min-h-screen  bg-gradient-to-tr from-white via-white to-pink-100 flex flex-col md:flex-row">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex-1 font-poppins p-6 ml-0 md:ml-5 lg:ml-35">
+      <div className="flex-1 font-poppins p-6 ml-0 mr-0 md:ml-5 md:mr-5 lg:mr-35 lg:ml-35">
         {/* Header */}
         <header className="flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:items-center mb-8 space-y-4 sm:space-y-0">
           <div>
@@ -132,25 +135,37 @@ const Dashboard = () => {
 
           {/* Buttons Section */}
           <div className="w-full max-w-md mx-auto grid grid-cols-2 gap-4 sm:gap-6">
-            <button className="flex flex-col items-start p-4 rounded-xl text-gray-600 text-sm hover:bg-indigo-950 hover:text-white transition font-bold duration-700 ease-in-out focus:ring-sky-200 shadow-2xl">
+            <button
+              onClick={() => navigate("/addplan")}
+              className="flex flex-col items-start p-4 rounded-xl text-gray-600 text-sm hover:bg-indigo-950 hover:text-white transition font-bold duration-700 ease-in-out focus:ring-sky-200 shadow-2xl"
+            >
               <span className="text-left mb-4">
                 ADD <br /> PLANS
               </span>
               <img src={Plans} alt="Add Plans" className="w-20 h-20" />
             </button>
-            <button className="flex flex-col items-start p-4 rounded-xl text-gray-600 text-sm hover:bg-indigo-950 hover:text-white transition font-bold duration-700 ease-in-out focus:ring-sky-200 shadow-2xl">
+            <button
+              onClick={() => navigate("/addclass")}
+              className="flex flex-col items-start p-4 rounded-xl text-gray-600 text-sm hover:bg-indigo-950 hover:text-white transition font-bold duration-700 ease-in-out focus:ring-sky-200 shadow-2xl"
+            >
               <span className="text-left mb-4">
                 ADD <br /> CLASSES
               </span>
               <img src={Classes} alt="Add Classes" className="w-24 h-24 " />
             </button>
-            <button className="flex flex-col items-start p-4 rounded-xl text-gray-600 text-sm hover:bg-indigo-950 hover:text-white transition font-bold duration-700 ease-in-out focus:ring-sky-200 shadow-2xl">
+            <button
+              onClick={() => navigate("/addtrainer")}
+              className="flex flex-col items-start p-4 rounded-xl text-gray-600 text-sm hover:bg-indigo-950 hover:text-white transition font-bold duration-700 ease-in-out focus:ring-sky-200 shadow-2xl"
+            >
               <span className="text-left mb-4">
                 ADD <br /> TRAINERS
               </span>
               <img src={Trainers} alt="Add Trainers" className="w-24 h-24" />
             </button>
-            <button className="flex flex-col items-start p-4 rounded-xl text-gray-600 text-sm hover:bg-indigo-950 hover:text-white transition font-bold duration-700 ease-in-out focus:ring-sky-200 shadow-2xl">
+            <button
+              onClick={() => navigate("/addmember")}
+              className="flex flex-col items-start p-4 rounded-xl text-gray-600 text-sm hover:bg-indigo-950 hover:text-white transition font-bold duration-700 ease-in-out focus:ring-sky-200 shadow-2xl"
+            >
               <span className="text-left mb-4">
                 ADD <br /> MEMBERS
               </span>

@@ -7,12 +7,13 @@ import Trainers from "../assets/icon3.png";
 import Members from "../assets/icon4.png";
 import Logout from "../assets/icon5.png";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axiosInstance from "../utils/axiosInstance";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -51,18 +52,23 @@ const Sidebar = () => {
       </div>
       {/* Navigation Icons */}
       <nav className="flex md:flex-col justify-around w-full space-y-0 md:space-y-10">
-        {menuItems.map((item, index) => (
-          <div
-            key={index}
-            className="relative group h-10 w-10 bg-blue-200 rounded-full mx-auto flex items-center justify-center hover:bg-purple-300 transition duration-300 ease-in-out"
-            onClick={() => navigate(item.path)}
-          >
-            <img src={item.icon} className="h-4 w-4" alt={`icon-${index}`} />
-            <div className="absolute left-1/2 -translate-x-1/2 -top-9 sm:left-full sm:top-[7px] transform sm:-translate-y-1/2 -translate-y-2 sm:ml-2 text-sm text-gray-800 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 sm:group-hover:translate-x-2 transition-all duration-300 ease-in-out bg-gray-200 py-1 px-2.5 rounded-xl font-bold">
-              {item.label}
+        {menuItems.map((item, index) => {
+          const isActive = location.pathname === item.path; // Check if the current path matches the menu item's path
+          return (
+            <div
+              key={index}
+              className={`relative group h-10 w-10 rounded-full mx-auto flex items-center justify-center hover:bg-purple-300 transition duration-300 ease-in-out ${
+                isActive ? "bg-purple-300" : "bg-blue-200"
+              }`} // Apply a different color when active
+              onClick={() => navigate(item.path)}
+            >
+              <img src={item.icon} className="h-4 w-4" alt={`icon-${index}`} />
+              <div className="absolute left-1/2 -translate-x-1/2 -top-9 sm:left-full sm:top-[7px] transform sm:-translate-y-1/2 -translate-y-2 sm:ml-2 text-sm text-gray-800 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 sm:group-hover:translate-x-2 transition-all duration-300 ease-in-out bg-gray-200 py-1 px-2.5 rounded-xl font-bold">
+                {item.label}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {/* Logout */}
         <div
           className="h-10 w-10 bg-blue-200 rounded-full mx-auto flex items-center justify-center hover:bg-red-300 transition duration-300 ease-in-out cursor-pointer"
