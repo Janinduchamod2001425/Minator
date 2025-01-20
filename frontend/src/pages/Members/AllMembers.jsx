@@ -36,20 +36,24 @@ const AllMembers = () => {
 
   const deleteMember = async (id) => {
     Swal.fire({
-      title: "Delete Plan?",
-      text: "Deleting this plan will remove it permanently.",
+      title: "Delete Member?",
+      text: "Deleting this member will remove his/her permanently.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#7542C5", // Custom confirm button color
       cancelButtonColor: "#607d8b", // Custom cancel button color
-      confirmButtonText: "Delete Plan",
+      confirmButtonText: "Delete member",
       cancelButtonText: "Cancel",
       backdrop: true, // Adds a backdrop
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           await axiosInstance.delete(`/api/clients/${id}`);
-          Swal.fire("Deleted!", "The plan has been deleted.", "success");
+          Swal.fire(
+            "Deleted!",
+            "The member has been Removed from Minator.",
+            "success"
+          );
           fetchMembers(); // Refresh the member list
         } catch (error) {
           Swal.fire(
@@ -121,19 +125,29 @@ const AllMembers = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              placeholder="Search by name, membership type, or status"
-              className="flex-1 sm:px-4 sm:py-1 sm:w-[500px] w-[200px] px-2 sm:text-[13px] font-poppins border rounded-lg bg-blue-50 font-medium text-gray-700 focus:outline-none focus:ring-purple-300"
+              placeholder="🔍 Search by name, membership type, or status"
+              className="flex-1 sm:px-4 sm:py-2 sm:w-[500px] w-[200px] px-2 sm:text-[13px] font-poppins border border-blue-200 rounded-lg bg-blue-50 font-medium text-gray-700 focus:outline-none focus:ring-purple-300"
             />
 
             {/* Clear Button */}
-            {searchQuery && (
+
+            <button
+              onClick={handleClearSearch}
+              className="sm:px-4 sm:py-1 sm:text-sm font-poppins font-bold text-xs px-3 py-0.5 bg-purple-950 text-white rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+            >
+              Clear
+            </button>
+
+            {/* In this way, the clear button appears when user search something */}
+
+            {/* {searchQuery && (
               <button
                 onClick={handleClearSearch}
                 className="sm:px-4 sm:py-1 sm:text-sm font-poppins font-bold text-xs px-3 py-0.5 bg-purple-950 text-white rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
               >
                 Clear
               </button>
-            )}
+            )} */}
           </div>
 
           <div className="py-4 sm:py-0 sm:mr-4">

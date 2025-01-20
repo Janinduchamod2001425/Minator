@@ -19,7 +19,7 @@ const formatDate = () => {
 const Dashboard = () => {
   const [memberCount, setMemberCount] = useState(0);
   const [trainerCount, setTrainerCount] = useState(0);
-  const [activeClassesCount, setActiveClassesCount] = useState(0);
+  const [classesCount, setClassesCount] = useState(0);
   const [monthlyRevenue, setMonthlyRevenue] = useState(0);
 
   const navigate = useNavigate();
@@ -44,10 +44,10 @@ const Dashboard = () => {
       }
     };
 
-    const fetchActiveClasses = async () => {
+    const fetchClasses = async () => {
       try {
         const response = await axiosInstance.get("/stats/classes");
-        setActiveClassesCount(response.data.activeClassesCount);
+        setClassesCount(response.data.classesCount);
       } catch (error) {
         console.error("Error fetching active classes:", error.message);
       }
@@ -65,7 +65,7 @@ const Dashboard = () => {
     // Call all fetch functions
     fetchMembers();
     fetchTrainers();
-    fetchActiveClasses();
+    fetchClasses();
     fetchMonthlyRevenue();
   }, []);
 
@@ -117,7 +117,7 @@ const Dashboard = () => {
               ACTIVE <br /> CLASSES
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 tracking-[0.10em]">
-              {activeClassesCount}
+              {classesCount}
             </h2>
           </div>
         </section>

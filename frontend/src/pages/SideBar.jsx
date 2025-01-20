@@ -2,7 +2,7 @@
 import { FaUserCircle } from "react-icons/fa";
 import Logo from "../assets/dashboard.png";
 import Plans from "../assets/icon1.png";
-import Classes from "../assets/icon2.png";
+import Classes from "../assets/icon6.png";
 import Trainers from "../assets/icon3.png";
 import Members from "../assets/icon4.png";
 import Logout from "../assets/icon5.png";

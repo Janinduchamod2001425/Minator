@@ -76,9 +76,9 @@ export default function App() {
           <Route path="/updatemember/:id" element={<UpdateMember />} />
 
           {/* Trainer Routes */}
-          <Route path="/trianers" element={<AllTrainers />} />
-          <Route path="/addtrianer" element={<AddTrainer />} />
-          <Route path="/updatetrianer/:id" element={<UpdateTrainer />} />
+          <Route path="/trainers" element={<AllTrainers />} />
+          <Route path="/addtrainer" element={<AddTrainer />} />
+          <Route path="/updatetrainer/:id" element={<UpdateTrainer />} />
         </Route>
       </Routes>
       <Toaster />

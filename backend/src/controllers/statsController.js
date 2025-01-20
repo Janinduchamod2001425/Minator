@@ -25,15 +25,16 @@ export const getTotalTrainers = async (req, res) => {
   }
 };
 
-// Get Active classes count
-export const getActiveClasses = async (req, res) => {
+// Get total classes count
+export const getTotalClasses = async (req, res) => {
   try {
-    const activeClassesSnapshot = await getDocs(collection(db, "classes"));
-    const activeClassesCount = activeClassesSnapshot.docs.filter(
-      (doc) => doc.data().status === "active"
-    );
-    res.status(200).json({ activeClassesCount: activeClassesCount.length });
-  } catch (error) { }
+    const classesSnapshot = await getDocs(collection(db, "classes"));
+    const classesCount = classesSnapshot.size;
+    res.status(200).json({ classesCount });
+  } catch (error) {
+    console.error("Error fetching total classes:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
 // Get Monthly Revenue Details

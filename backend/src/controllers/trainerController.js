@@ -4,6 +4,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   updateDoc,
 } from "firebase/firestore";
@@ -25,12 +26,31 @@ export const addTrainer = async (req, res) => {
       contactInfo,
     });
 
-    res.status(201).json({ message: "Trainer added successfully" });
+    res.status(201).json({ message: "Trainer added successfully", id: trainerRef.id });
   } catch (error) {
     console.error("Error adding trainer:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+// Get Trainer by id
+export const getTrainerById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const trainerRef = doc(db, "trainers", id);
+    const trainerSnapShot = await getDoc(trainerRef);
+
+    if (!trainerSnapShot) {
+      return res.status(404).json({ message: "Trainer not found" });
+    }
+
+    res.status(200).json({ id: trainerSnapShot.id, ...trainerSnapShot.data() });
+  } catch (error) {
+    console.error("Error fetching trainer:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
 
 // Get all Trainers
 export const getAllTrainers = async (req, res) => {

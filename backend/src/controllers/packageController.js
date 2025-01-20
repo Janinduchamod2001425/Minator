@@ -120,7 +120,6 @@ export const updatePackage = async (req, res) => {
 };
 
 // Delete a package by ID
-
 export const deletePackage = async (req, res) => {
   const { id } = req.params;
 

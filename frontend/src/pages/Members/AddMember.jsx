@@ -46,8 +46,8 @@ const AddMember = () => {
         joinDate,
       });
 
-      const { plan } = response.data;
-      localStorage.setItem("plan", JSON.stringify(plan));
+      const { member } = response.data;
+      localStorage.setItem("member", JSON.stringify(member));
 
       // show success message
       toast.success("New Member Added to Minator");
@@ -214,7 +214,7 @@ const AddMember = () => {
           </form>
 
           {/* Image Section */}
-          <div className="hidden lg:block max-w-md">
+          <div className="hidden lg:block max-w-md mr-10 mb-3">
             <Lottie
               animationData={loadingAnimation}
               loop={true}

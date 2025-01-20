@@ -1,5 +1,5 @@
 const AllTrainers = () => {
-  return <div>AllTrainers</div>;
+  return <div></div>;
 };
 
 export default AllTrainers;
