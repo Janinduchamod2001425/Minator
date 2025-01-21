@@ -12,9 +12,9 @@ import {
 // Add new Trainer
 export const addTrainer = async (req, res) => {
   try {
-    const { name, speciality, assignedClasses, contactInfo } = req.body;
+    const { name, speciality, assignedClasses, contactInfo, status } = req.body;
 
-    if (!name || !speciality || !assignedClasses || !contactInfo) {
+    if (!name || !speciality || !assignedClasses || !contactInfo || !status) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -23,6 +23,7 @@ export const addTrainer = async (req, res) => {
       name,
       speciality,
       assignedClasses,
+      status,
       contactInfo,
     });
 
@@ -61,7 +62,7 @@ export const getAllTrainers = async (req, res) => {
       id: doc.id,
       ...doc.data(),
     }));
-    res.status(200).json({ trainers });
+    res.status(200).json(trainers);
   } catch (error) {
     console.error("Error fetching trainers:", error.message);
     res.status(500).json({ message: "Internal Server Error" });

@@ -100,7 +100,7 @@ const AllClasses = () => {
         <div className="sm:h-[320px] lg:h-[528px] overflow-y-auto mb-10 sm:mb-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-8">
             {loading ? (
-              <p className="font-bold">💪 Loading plans...</p>
+              <p className="font-bold">📄 Loading Classes...</p>
             ) : classes.length > 0 ? (
               classes.map((cls) => (
                 // Plan Cards

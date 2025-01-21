@@ -81,7 +81,7 @@ const AllMembers = () => {
           const isMembershipTypeMatch = member.membershipType
             .toLowerCase()
             .includes(lowerCaseQuery);
-          const isStatusMatch = member.status.toLowerCase() === lowerCaseQuery; // Exact match for status
+          const isStatusMatch = member.status.toLowerCase() === lowerCaseQuery;
           return isNameMatch || isMembershipTypeMatch || isStatusMatch;
         });
         setFilteredMembers(filtered);
@@ -169,7 +169,7 @@ const AllMembers = () => {
         {/* Main Panel */}
         <div className="sm:h-[520px] overflow-y-scroll mb-10 sm:mb-0">
           {loading ? (
-            <p className="font-bold">💪 Loading Members...</p>
+            <p className="font-bold">🏋️‍♀️ Loading Members...</p>
           ) : filteredMembers.length > 0 ? (
             <table className="table-auto w-full bg-white shadow-md rounded-md">
               <thead className="bg-gray-200 sticky top-0 z-10">
@@ -278,7 +278,7 @@ const AllMembers = () => {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h- w-6"
+                          className="h-6 w-6"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"

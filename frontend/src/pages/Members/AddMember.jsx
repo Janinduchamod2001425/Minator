@@ -128,7 +128,7 @@ const AddMember = () => {
                   />
                 </div>
 
-                {/* Price */}
+                {/* Membership Type */}
                 <div>
                   <label
                     htmlFor="membershipType"
@@ -151,7 +151,7 @@ const AddMember = () => {
                   </select>
                 </div>
 
-                {/* Duration */}
+                {/* Status */}
                 <div>
                   <label className="block text-sm font-medium text-gray-600 mb-2">
                     Status

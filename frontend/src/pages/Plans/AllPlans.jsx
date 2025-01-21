@@ -113,7 +113,7 @@ const AllPlans = () => {
         <div className="sm:h-[520px] overflow-y-auto mb-10 sm:mb-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-8">
             {loading ? (
-              <p className="font-bold">💪 Loading plans...</p>
+              <p className="font-bold">📦 Loading Plans...</p>
             ) : plans.length > 0 ? (
               plans.map((plan) => (
                 // Plan Cards
@@ -139,7 +139,7 @@ const AllPlans = () => {
 
                   <p className="text-gray-700 text-sm leading-relaxed">
                     <span
-                      className={`text-white px-2 py-1 rounded-2xl text-xs font-poppins font-bold ${
+                      className={`text-white px-2.5 py-1 rounded-2xl text-xs font-poppins font-bold ${
                         plan.duration.toLowerCase() === "monthly"
                           ? "bg-purple-500"
                           : plan.duration.toLowerCase() === "yearly"
@@ -176,7 +176,7 @@ const AllPlans = () => {
                     </button>
                   </div>
 
-                  <p className="text-xs text-gray-500 mt-2 text-left">
+                  <p className="text-xs text-gray-400 mt-2 text-left font-semibold">
                     Created on {new Date(plan.createdAt).toLocaleDateString()}
                   </p>
                 </div>

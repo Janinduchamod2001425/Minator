@@ -144,7 +144,7 @@ const UpdateMember = () => {
                   />
                 </div>
 
-                {/* Price */}
+                {/* Membership type */}
                 <div>
                   <label
                     htmlFor="membershipType"

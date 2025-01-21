@@ -4,7 +4,6 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import Dashboard from "./pages/Dashboard";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import ProfilePage from "./pages/ProfilePage";
 
 import { Toaster } from "react-hot-toast";
 import AllPlans from "./pages/Plans/AllPlans";
@@ -58,7 +57,6 @@ export default function App() {
         {/* Private Routes */}
         <Route path="/" element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<ProfilePage />} />
 
           {/* Plan Routes */}
           <Route path="/plans" element={<AllPlans />} />

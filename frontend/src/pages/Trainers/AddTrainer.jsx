@@ -22,6 +22,7 @@ const AddTrainer = () => {
     name: "",
     speciality: "",
     assignedClasses: "",
+    status: "",
     contactInfo: "",
   });
 
@@ -53,11 +54,26 @@ const AddTrainer = () => {
       assignedClasses,
       contactInfo,
       countryCode,
+      status,
     } = formData;
 
     // Check if all the fields are filled
-    if (!title || !name || !speciality || !assignedClasses || !contactInfo) {
+    if (
+      !title ||
+      !name ||
+      !speciality ||
+      !assignedClasses ||
+      !contactInfo ||
+      !status
+    ) {
       toast.error("All fields must be filled");
+      return;
+    }
+
+    if (!contactInfo.length == 10) {
+      toast.error(
+        "Invalid contact number. Please enter a valid 10-digit number"
+      );
       return;
     }
 
@@ -71,6 +87,7 @@ const AddTrainer = () => {
         name: `${title} ${name}`,
         speciality,
         assignedClasses,
+        status,
         contactInfo: fullContactInfo,
       });
 
@@ -126,7 +143,7 @@ const AddTrainer = () => {
             {/* Navigate to Plans page */}
             <p className="text-xs text-gray-500">
               <Link
-                to="/members"
+                to="/trainers"
                 className="text-purple-600 font-medium hover:underline"
               >
                 See all trainers
@@ -201,6 +218,7 @@ const AddTrainer = () => {
                     <option value="Yoga">Yoga</option>
                     <option value="Pilates">Pilates</option>
                     <option value="CrossFit">CrossFit</option>
+                    <option value="Sports">Sports</option>
                   </select>
                 </div>
 
@@ -228,6 +246,33 @@ const AddTrainer = () => {
                   </select>
                 </div>
 
+                {/* Status */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                    Status
+                  </label>
+                  <div className="flex flex-wrap gap-3">
+                    {["Active", "Inactive"].map((statusOption) => (
+                      <div
+                        key={statusOption}
+                        onClick={() =>
+                          setFormData({
+                            ...formData,
+                            status: statusOption.toLowerCase(),
+                          })
+                        }
+                        className={`px-4 py-1 text-sm rounded-full cursor-pointer ${
+                          formData.status === statusOption.toLowerCase()
+                            ? "bg-purple-600 text-white font-semibold"
+                            : "bg-gray-200 text-gray-700"
+                        }`}
+                      >
+                        {statusOption}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Contact Info */}
                 <div>
                   <label
@@ -248,13 +293,45 @@ const AddTrainer = () => {
                           countryCode: e.target.value,
                         })
                       }
-                      className="text-sm w-20 px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
+                      className="text-sm w-16 px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
                       required
                     >
-                      <option value="+1">+1</option>
-                      <option value="+44">+44</option>
-                      <option value="+91">+91</option>
-                      <option value="+94">+94</option>
+                      <option value="+1">+1 (United States)</option>
+                      <option value="+44">+44 (United Kingdom)</option>
+                      <option value="+91">+91 (India)</option>
+                      <option value="+94">+94 (Sri Lanka)</option>
+                      <option value="+61">+61 (Australia)</option>
+                      <option value="+81">+81 (Japan)</option>
+                      <option value="+49">+49 (Germany)</option>
+                      <option value="+33">+33 (France)</option>
+                      <option value="+86">+86 (China)</option>
+                      <option value="+39">+39 (Italy)</option>
+                      <option value="+7">+7 (Russia)</option>
+                      <option value="+34">+34 (Spain)</option>
+                      <option value="+55">+55 (Brazil)</option>
+                      <option value="+27">+27 (South Africa)</option>
+                      <option value="+82">+82 (South Korea)</option>
+                      <option value="+31">+31 (Netherlands)</option>
+                      <option value="+47">+47 (Norway)</option>
+                      <option value="+46">+46 (Sweden)</option>
+                      <option value="+41">+41 (Switzerland)</option>
+                      <option value="+90">+90 (Turkey)</option>
+                      <option value="+52">+52 (Mexico)</option>
+                      <option value="+63">+63 (Philippines)</option>
+                      <option value="+62">+62 (Indonesia)</option>
+                      <option value="+64">+64 (New Zealand)</option>
+                      <option value="+60">+60 (Malaysia)</option>
+                      <option value="+65">+65 (Singapore)</option>
+                      <option value="+20">+20 (Egypt)</option>
+                      <option value="+971">
+                        🇦🇪 +971 (United Arab Emirates)
+                      </option>
+                      <option value="+234">🇳🇬 +234 (Nigeria)</option>
+                      <option value="+254">🇰🇪 +254 (Kenya)</option>
+                      <option value="+356">🇲🇹 +356 (Malta)</option>
+                      <option value="+372">🇪🇪 +372 (Estonia)</option>
+                      <option value="+48">🇵🇱 +48 (Poland)</option>
+                      <option value="+351">🇵🇹 +351 (Portugal)</option>
                     </select>
 
                     {/* Phone Number */}

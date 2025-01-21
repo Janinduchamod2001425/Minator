@@ -37,6 +37,18 @@ export const getTotalClasses = async (req, res) => {
   }
 };
 
+// Get total Plans count
+export const getTotalPlans = async (req, res) => {
+  try {
+    const plansSnapshot = await getDocs(collection(db, "packages"));
+    const plansCount = plansSnapshot.size;
+    res.status(200).json({ plansCount });
+  } catch (error) {
+    console.error("Error fetching total plans:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
 // Get Monthly Revenue Details
 export const getMonthlyRevenue = async (req, res) => {
   try {

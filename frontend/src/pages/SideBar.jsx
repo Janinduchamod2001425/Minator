@@ -38,7 +38,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="bg-white w-full md:w-20 lg:w-24 p-4 flex md:flex-col items-center md:items-stretch fixed md:relative z-10 md:z-0 bottom-0 left-0 md:bottom-auto">
+    <aside className="bg-white w-full md:w-20 lg:w-24 p-4 flex md:flex-col items-center shadow-xl md:items-stretch fixed md:relative z-10 md:z-0 bottom-0 left-0 md:bottom-auto">
       {/* Logo */}
       <div className="mb-20 hidden md:block">
         <div className="h-10 w-8 mx-auto">
@@ -79,10 +79,7 @@ const Sidebar = () => {
       </nav>
       {/* Profile Picture */}
       <div className="mt-auto mb-3 hidden md:block mx-auto">
-        <FaUserCircle
-          className="text-black text-4xl"
-          onClick={() => navigate("/profile")}
-        />
+        <FaUserCircle className="text-black text-4xl" />
       </div>
     </aside>
   );

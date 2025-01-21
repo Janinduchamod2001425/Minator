@@ -62,7 +62,7 @@ const SignUpPage = () => {
       localStorage.setItem("user", JSON.stringify(user));
 
       // show success message
-      toast.success("Signup successful!");
+      toast.success("Welcome to Minator!");
       navigate("/dashboard");
     } catch (error) {
       toast.error(error.response?.data?.message || "Signup failed");

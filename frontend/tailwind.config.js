@@ -13,6 +13,9 @@ export default {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
         product: ['"Product Sans"', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'], // Add Roboto font
+        lato: ['Lato', 'sans-serif'],     // Add Lato font
+        montserrat: ['Montserrat', 'sans-serif'], // Add Montserrat font
       },
       keyframes: {
         smoothVibrate: {
