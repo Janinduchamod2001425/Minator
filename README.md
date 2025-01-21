@@ -3,7 +3,7 @@ Minator is a sleek and powerful admin dashboard designed to streamline gym opera
 
 <img src="https://go-skill-icons.vercel.app/api/icons?i=react,vite,tailwind,nodejs,express,firebase,chartjs,lottie,sweetalert2,jwt" /> <br />
 
-![Minator App Demo](./cover/minator.svg)
+![Minator App Demo](./cover/minator.png)
 
 ## 🚀 Tech Stack
 - **Frontend**: React + Vite, Tailwind CSS for styling, Chart.js for graphs, Lottie for animations.
