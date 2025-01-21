@@ -5,12 +5,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCdFqDUekBuis-EzN4DcbTmq_-BotsCyVE",
-    authDomain: "gymmanagementsystem-f394d.firebaseapp.com",
-    projectId: "gymmanagementsystem-f394d",
-    storageBucket: "gymmanagementsystem-f394d.firebasestorage.app",
-    messagingSenderId: "535199624844",
-    appId: "1:535199624844:web:c7f4d714aeb43a22ab95a9",
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase App
