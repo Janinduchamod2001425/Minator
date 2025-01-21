@@ -18,6 +18,7 @@ import planAnimation from "../assets/plan.json";
 import axiosInstance from "../utils/axiosInstance";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BarGraph from "../components/BarGraph";
 
 const getGreeting = () => {
   const currentHour = new Date().getHours();
@@ -109,7 +110,7 @@ const Dashboard = () => {
         </header>
 
         {/* Statistics Section */}
-        <section className="grid lg:grid-cols-4 gap-y-6 px-4 font-poppins rounded-xl">
+        <section className="grid lg:grid-cols-5 gap-y-6 px-16 font-poppins rounded-xl sm:px-2">
           {/* Total Members Count */}
           <div className="flex items-center justify-between sm:gap-2 gap-4 bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 sm:w-60 w-full sm:h-[140px] h-[120px] p-4 rounded-xl shadow-md">
             {/* Left Section */}
@@ -213,15 +214,26 @@ const Dashboard = () => {
               </h2>
             </div>
           </div>
+
+          {/* Monthly Revenue */}
+          <div className="sm:text-right text-center flex flex-col justify-between bg-gradient-to-tr from-indigo-100 via-purple-100 to-indigo-50 sm:w-64 w-full sm:h-[140px] h-[120px] p-4 rounded-xl shadow-md">
+            <h4 className="text-sm sm:text-md font-bold text-gray-400 uppercase">
+              Monthly Revenue
+            </h4>
+            <p className="text-3xl font-semibold text-green-500">
+              120,000 <sup className="text-red-700">LKR</sup>
+            </p>
+            <p className="text-sm text-gray-500 font-mono">Updated: 22 Jan</p>
+          </div>
         </section>
 
         {/* Main Panel */}
         <div className="text-white p-2 rounded-3xl flex flex-col lg:flex-row items-center justify-between gap-6 mb-12 sm:mb-0 sm:ml-1">
           {/* Pie Chart Section */}
-          <div className="bg-gradient-to-r from-white-100 via-gray-50 to-indigo-50 rounded-3xl shadow-lg p-5 mt-5">
-            <h2 className="text-2xl font-bold text-gray-700 mb-4">
+          <div className="bg-gradient-to-r from-white-100 via-gray-50 to-indigo-50 rounded-3xl shadow-lg p-5 mt-3">
+            <h4 className="text-xl font-bold text-gray-700 mb-4">
               Overview of Statistics
-            </h2>
+            </h4>
             <div className="w-full max-w-md mx-auto">
               <PieChart
                 data={[memberCount, trainerCount, classesCount, plansCount]}
@@ -229,13 +241,150 @@ const Dashboard = () => {
             </div>
           </div>
 
+          {/* Bar Graph Section */}
+          <div className="bg-gradient-to-br from-indigo-100 via-white to-indigo-50 rounded-3xl shadow-lg p-5 mt-5 sm:mt-3 sm:-ml-74 sm:h-[380px]">
+            <h3 className="text-xl font-bold text-gray-700 mb-4">
+              Class Counts by Day
+            </h3>
+            <p className="text-xs text-gray-400 mb-8 font-semibold">
+              The bar graph below shows the <br /> number of classes scheduled
+              for each day of the week.
+            </p>
+            <p className="text-xs text-gray-400 mb-4 font-semibold">
+              Hover over the bars <br /> for more detailed <br /> insights on
+              each day&apos;s class count.
+            </p>
+            <div className="w-full max-w-md mx-auto sm:mt-34">
+              <BarGraph />
+            </div>
+          </div>
+
+          {/* Your Goals Section */}
+          <div className="bg-gradient-to-r from-white via-indigo-50 to-indigo-100 rounded-3xl shadow-lg p-5 sm:ml-2 mt-3 sm:w-full sm:max-w-[280px] w-[350px] sm:h-[380px]">
+            <h3 className="text-xl font-bold text-gray-700 mb-4">Your Goals</h3>
+            <div className="space-y-4">
+              {[
+                {
+                  label: "Running",
+                  progress: "70km/80km",
+                  percentage: 79,
+                  emoji: "\ud83c\udfc3",
+                },
+                {
+                  label: "Sleeping",
+                  progress: "50hrs/60hrs",
+                  percentage: 60,
+                  emoji: "\ud83d\udecc",
+                },
+                {
+                  label: "Weight Loss",
+                  progress: "70kg/100kg",
+                  percentage: 60,
+                  emoji: "\ud83d\udd25",
+                },
+              ].map((goal, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <span className="text-3xl">{goal.emoji}</span>
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-700">
+                        {goal.label}
+                      </h4>
+                      <p className="text-xs text-gray-500">{goal.progress}</p>
+                    </div>
+                  </div>
+                  <div className="relative w-12 h-12">
+                    <svg className="w-full h-full" viewBox="0 0 36 36">
+                      <path
+                        className="text-gray-300"
+                        d="M18 2.0845
+                          a 15.9155 15.9155 0 0 1 0 31.831
+                          a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      />
+                      <path
+                        className="text-indigo-500"
+                        d="M18 2.0845
+                          a 15.9155 15.9155 0 0 1 0 31.831"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeDasharray={`${goal.percentage}, 100`}
+                      />
+                    </svg>
+                    <span className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-gray-700">
+                      {goal.percentage}%
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <hr className="mt-2" />
+
+            {/* Your Goals Section */}
+            <h3 className="text-sm font-bold text-gray-700 mt-3 mb-2">
+              Scheduled
+            </h3>
+            <div className="flex items-center justify-between bg-pink-50 shadow-xl p-3 rounded-xl">
+              <div className="flex items-center">
+                <span className="text-2xl mr-4">🧘‍♂️</span>
+                <div>
+                  <h5 className="text-sm font-roboto font-semibold text-gray-800 mb-1.5">
+                    Training - Yoga
+                  </h5>
+                  <p className="text-xs font-bold text-white bg-purple-600 w-16 px-2 py-0.5 rounded-xl text-center">
+                    Fitness
+                  </p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-gray-400">22 Mar</p>
+                <button className="text-gray-500 hover:text-gray-800">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 12h12M6 16h12M6 8h12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Buttons Section */}
-          <div className="w-full max-w-xs mx-auto grid grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-10 mb-8">
+          <div className="w-full max-w-xs sm:mx-18 grid grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-11 mb-8 bg-gradient-to-r from-white-100 via-gray-50 to-indigo-50 px-4 py-4 rounded-xl">
             {[
-              { label: "PLANS", img: Plans, route: "/addplan" },
-              { label: "CLASSES", img: Classes, route: "/addclass" },
-              { label: "TRAINERS", img: Trainers, route: "/addtrainer" },
-              { label: "MEMBERS", img: Members, route: "/addmember" },
+              {
+                label: "PLANS",
+                img: Plans,
+                route: "/addplan",
+              },
+              {
+                label: "CLASSES",
+                img: Classes,
+                route: "/addclass",
+              },
+              {
+                label: "TRAINERS",
+                img: Trainers,
+                route: "/addtrainer",
+              },
+              {
+                label: "MEMBERS",
+                img: Members,
+                route: "/addmember",
+              },
             ].map((item, index) => (
               <button
                 key={index}

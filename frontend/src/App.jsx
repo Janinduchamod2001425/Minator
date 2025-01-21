@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 
 import Lottie from "lottie-react";
 import loadingAnimation from "./assets/gym.json";
+import BarGraph from "./components/BarGraph";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -77,6 +78,8 @@ export default function App() {
           <Route path="/trainers" element={<AllTrainers />} />
           <Route path="/addtrainer" element={<AddTrainer />} />
           <Route path="/updatetrainer/:id" element={<UpdateTrainer />} />
+
+          <Route path="/test" element={<BarGraph />} />
         </Route>
       </Routes>
       <Toaster />

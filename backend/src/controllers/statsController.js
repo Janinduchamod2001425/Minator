@@ -49,6 +49,23 @@ export const getTotalPlans = async (req, res) => {
   }
 }
 
+// Get the class counts by day.
+export const getClassCountsByDay = async (req, res) => {
+  try {
+    const classesSnapshot = await getDocs(collection(db, "classes"));
+    const classes = classesSnapshot.docs.map((doc) => doc.data());
+    const classCounts = classes.reduce((acc, curr) => {
+      acc[curr.day] = (acc[curr.day] || 0) + 1;
+      return acc;
+    }, {});
+
+    res.status(200).json(classCounts);
+  } catch (error) {
+    console.error("Error fetching class counts by day:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
 // Get Monthly Revenue Details
 export const getMonthlyRevenue = async (req, res) => {
   try {
